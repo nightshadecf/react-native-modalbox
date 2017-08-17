@@ -47,6 +47,7 @@ var styles = StyleSheet.create({
 var ModalBox = createReactClass({
 
   propTypes: {
+    dismissKeyboard:  PropTypes.bool,
     isOpen: PropTypes.bool,
     isDisabled: PropTypes.bool,
     startOpen: PropTypes.bool,
@@ -74,6 +75,7 @@ var ModalBox = createReactClass({
   getDefaultProps: function () {
     return {
       startOpen: false,
+      dismissKeyboard: true,
       backdropPressToClose: true,
       swipeToClose: true,
       swipeThreshold: 50,
@@ -283,7 +285,7 @@ var ModalBox = createReactClass({
       }
     );
     this.state.animClose.start(() => {
-      Keyboard.dismiss();
+      this.props.dismissKeyboard && Keyboard.dismiss();
       this.state.isAnimateClose = false;
       this.state.isOpen = false;
       this.setState({});
